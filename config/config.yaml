@@ -84,13 +84,35 @@ publishers:
 
 # 排程設定
 schedule:
-  fetch_data:
-    day: "saturday"
-    time: "22:00"
+  # 週報
+  weekly_report:
+    fetch_data:
+      day: "saturday"
+      time: "22:00"
+    reminder:
+      day: "sunday"
+      time: "14:00"
 
-  reminder:
-    day: "sunday"
-    time: "14:00"
+  # 日報
+  daily_report:
+    enabled: true
+    days: ["monday", "tuesday", "wednesday", "thursday", "friday"]
+    time: "07:00"  # 台灣時間早上 7 點
+
+# 日報設定
+daily_report:
+  enabled: true
+  news:
+    us_count: 5           # 美股新聞數量
+    tw_count: 5           # 台股新聞數量
+    finnhub_category: "general"
+    cnyes_category: "tw_stock"
+  publishers:
+    x:
+      enabled: true
+      thread_max_posts: 3  # 日報只發 3 則串推
+    threads:
+      enabled: true
 
 # 輸出設定
 output:

@@ -102,6 +102,7 @@ cp skills/*.md ~/.claude/skills/
 |------|------|----------|
 | `/market-data-fetch` | 抓取所有市場資料 | 週六晚 / 週日早 |
 | `/weekly-report` | 產出週報 + 發布社群 | 週日下午 |
+| `/daily-report` | 產出日報 + 發布社群 | 週一至週五早上 |
 | `/trade-plan` | 規劃交易計畫 | 需要時 |
 
 ### 手動執行
@@ -110,10 +111,14 @@ cp skills/*.md ~/.claude/skills/
 # 啟動虛擬環境
 source venv/bin/activate
 
-# 抓取資料
+# 週報資料抓取
 python scripts/fetch_all.py
 
+# 日報資料抓取
+python scripts/fetch_daily.py
+
 # 資料會存放在 data/raw/{日期}/ 目錄
+# 日報資料在 data/raw/{日期}/daily/ 子目錄
 ```
 
 ## 資料夾結構

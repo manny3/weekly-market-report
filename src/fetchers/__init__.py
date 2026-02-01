@@ -9,6 +9,8 @@ from .finmind_fetcher import FinMindFetcher
 from .economic_calendar_fetcher import EconomicCalendarFetcher
 from .tw_industry_fetcher import TwIndustryFetcher
 from .revenue_highlights_fetcher import RevenueHighlightsFetcher
+from .finnhub_news_fetcher import FinnhubNewsFetcher
+from .cnyes_news_fetcher import CnyesNewsFetcher
 
 __all__ = [
     'FutuFetcher',
@@ -21,4 +23,6 @@ __all__ = [
     'EconomicCalendarFetcher',
     'TwIndustryFetcher',
     'RevenueHighlightsFetcher',
+    'FinnhubNewsFetcher',
+    'CnyesNewsFetcher',
 ]
