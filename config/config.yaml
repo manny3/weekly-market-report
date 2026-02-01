@@ -1,0 +1,99 @@
+# Weekly Market Report - 主設定檔
+
+# 資料來源設定
+data_sources:
+  futu:
+    enabled: true
+    markets: ["US", "HK", "TW"]
+
+  tradingview:
+    enabled: true
+    symbols:
+      us_indices: ["SPX", "NDX", "DJI"]
+      tw_indices: ["TWII", "TPEX"]
+
+  yahoo_finance:
+    enabled: true
+
+  goodinfo:
+    enabled: true
+    # 台股基本面資料
+
+  cmoney:
+    enabled: true
+    # 台股籌碼面資料
+
+  finviz:
+    enabled: true
+    # 美股篩選器
+
+  finnhub:
+    enabled: true
+    # 經濟日曆 (Fed, CPI, PMI 等)
+
+  tw_industry:
+    enabled: true
+    # 台股產業族群表現
+    hot_threshold: 2.0   # 平均漲幅 > 2% 標記為熱門
+    cold_threshold: -2.0  # 平均跌幅 < -2% 標記為冷門
+
+  tw_revenue:
+    enabled: true
+    # 營收亮點偵測
+    highlight_rules:
+      record_high: true        # 營收創歷史新高
+      yoy_threshold: 50        # 年增率 >= 50% 標記
+      yoy_decline_threshold: -30  # 年減率 <= -30% 標記
+
+# 分析設定
+analysis:
+  timeframes:
+    - weekly
+    - daily
+
+  indicators:
+    - SMA_20
+    - SMA_50
+    - SMA_200
+    - RSI_14
+    - MACD
+
+  sectors:
+    us: ["XLK", "XLF", "XLE", "XLV", "XLI", "XLC", "XLY", "XLP", "XLU", "XLRE", "XLB"]
+    tw: ["半導體", "金融", "傳產", "生技", "航運", "電子"]
+
+# 發布設定
+publishers:
+  notion:
+    enabled: true
+    database_id: ""  # 從 .env 讀取
+
+  threads:
+    enabled: true
+    method: "playwright_mcp"  # 使用 Playwright MCP 瀏覽器自動化
+    # 登入流程：threads.com → 點擊「使用 Instagram 帳號繼續」→ IG 登入頁面 → 輸入帳密
+    # 憑證來源：.env 中的 THREADS_USERNAME / THREADS_PASSWORD (Instagram 帳密)
+
+  x:
+    enabled: true
+    method: "playwright_mcp"  # 使用 Playwright MCP 瀏覽器自動化
+    # X API v2 需付費方案，改用 Playwright MCP 直接操作瀏覽器
+    # 憑證來源：.env 中的 X_USERNAME / X_PASSWORD
+    thread_max_posts: 5
+    # 串推方式：使用 compose dialog 的「加入貼文」按鈕建立完整串推後一次發布
+
+# 排程設定
+schedule:
+  fetch_data:
+    day: "saturday"
+    time: "22:00"
+
+  reminder:
+    day: "sunday"
+    time: "14:00"
+
+# 輸出設定
+output:
+  save_to_notion: true
+  save_to_local: true
+  archive_days: 90
